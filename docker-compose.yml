@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_PORT=5678
+      - NODE_ENV=production
+      - N8N_PROTOCOL=http
+      - N8N_HOST=${COOLIFY_FQDN}
+      # Additional recommended environment variables for security
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:-strongRandomKey}
+      - WEBHOOK_URL=http://${COOLIFY_FQDN}/
+      - GENERIC_TIMEZONE=UTC
+    volumes:
+      - n8n_data:/home/node/.n8n
+    restart: unless-stopped
+
+volumes:
+  n8n_data:
+    driver: local
