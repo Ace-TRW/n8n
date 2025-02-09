@@ -8,9 +8,10 @@ services:
     environment:
       - N8N_PORT=5678
       - NODE_ENV=production
-      - N8N_PROTOCOL=https # Use HTTPS
+      - N8N_PROTOCOL=http
       - N8N_HOST=${COOLIFY_FQDN}
-      - WEBHOOK_URL=https://${COOLIFY_FQDN}/ # Use HTTPS here too
+      - WEBHOOK_URL=http://${COOLIFY_FQDN}/
+      - N8N_SECURE_COOKIE=false # Disable secure cookie for HTTP access
       - GENERIC_TIMEZONE=UTC
     volumes:
       - n8n_data:/home/node/.n8n
